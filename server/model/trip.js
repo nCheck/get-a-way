@@ -12,7 +12,11 @@ var tripSchema = new mongoose.Schema({
     isActive :{
         type : Boolean , 
         default : false
-    } ,  
+    } ,
+    isSuggested :{
+        type : Boolean , 
+        default : false
+    } , 
     loc: {
         type: [Number],
         required: true

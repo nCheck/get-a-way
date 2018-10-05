@@ -23,6 +23,7 @@ module.exports.startPlan = (req , res)=>{
                 duration: duration,
             } , (err , trip)=>{
                 usr.catalogue.push(trip._id)
+                usr.save()
                 if(!err){
                     res.send("Done")
                 }

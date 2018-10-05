@@ -3,7 +3,8 @@ var router   = express.Router();
 var parser   = require('body-parser');
 const dir    = __dirname;
 
-var regCtrl = require('../ctrlr/reg.ctrl')
+var regCtrl = require('../ctrlr/reg.ctrl'),
+    moodCtrl = require('../ctrlr/mood.ctrl')
 
 
 
@@ -14,9 +15,11 @@ router.route('/start')
     .post(regCtrl.startPlan)
 
 
+router.route('/setMood')
+    .post(moodCtrl.getMoodData)
 
-
-
+router.route('/getFoodie')
+    .get(moodCtrl.getFoodie)
 
 
 
