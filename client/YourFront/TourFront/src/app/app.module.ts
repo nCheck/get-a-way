@@ -2,7 +2,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { DataService } from './data.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from './../environments/environment';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AuthGuard } from './auth.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { PlacesComponent } from './places/places.component';
 const appRoutes = [
   {
     path: '',
@@ -20,8 +23,8 @@ const appRoutes = [
     pathMatch: 'full'
   },
   {
-    path:'home',
-    component:HomeComponent,
+    path: 'home',
+    component: HomeComponent,
     canActivate: [AuthGuard],
 
   },
@@ -31,6 +34,7 @@ const appRoutes = [
     component: LoginsignupComponent,
 
   },
+  {path : 'places' , component : PlacesComponent}
 ];
 @NgModule({
   declarations: [
@@ -38,6 +42,7 @@ const appRoutes = [
     HeaderComponent,
     HomeComponent,
     LoginsignupComponent,
+    PlacesComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,8 @@ const appRoutes = [
     AngularFireStorageModule,
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
+    NgbModule,
+    FormsModule
   ],
   providers: [DataService,  AuthGuard],
   bootstrap: [AppComponent]
