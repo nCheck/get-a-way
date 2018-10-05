@@ -38,3 +38,25 @@ busy_hours(place_id, key).then(data => {
         console.log(ele.hours)
     }); 
  });
+
+//Zomato API
+
+var request = require('request');
+
+var options = {
+url: 'https://developers.zomato.com/api/v2.1/restaurant?res_id=16774318',
+headers: {
+    'user-key' : 'f0cabfc27a00bb0065e7eb6c99c6dcc8'
+}
+};
+request.get(
+options,
+function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        console.log(JSON.stringify(body))
+    }
+    else{
+        console.log(error)
+    }
+}
+);
