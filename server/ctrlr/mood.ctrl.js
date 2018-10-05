@@ -100,7 +100,6 @@ relgiousData = (url)=>{
         
             
                 }
-                console.log(dataListReligious.length , " religious ");
                 resolve(dataListReligious)                
             }
           });
@@ -164,3 +163,15 @@ module.exports.getMoodData = async (req , res) =>{
 
 
 // getFoodie(19.0607 , 72.8362);
+
+
+module.exports.dummyPlaces = async(req , res) =>{
+    var lat = 19.0607,
+        lon = 72.8362
+    suggestions = {}
+    let bod1 = await getFoodie(lat , lon)
+    suggestions.Foodie = bod1
+    let bod2 = await getRelgious(lat , lon)
+    suggestions.Religious = bod2
+    res.send(suggestions)    
+}

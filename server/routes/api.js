@@ -23,6 +23,8 @@ router.route('/setMood')
     .post(moodCtrl.getMoodData)
     .get(moodCtrl.getMoodData)
 
+router.route('/places')
+    .get(moodCtrl.dummyPlaces)
 
 
 
