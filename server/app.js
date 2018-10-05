@@ -1,11 +1,11 @@
 var express               = require('express');
 var parser                = require('body-parser');
 var mongoose              = require('mongoose');
-
+var app		               	=express();
 
 const dir                 = __dirname;
 var port = process.env.PORT || 6007;
-
+require('./model/db.js');
 
 //Getting Routes
 var apiRoutes = require('./routes/api');

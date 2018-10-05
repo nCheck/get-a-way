@@ -27,10 +27,10 @@ var tripSchema = new mongoose.Schema({
         type : [String]
     } , 
     
-    visted :[{type : Schema.Types.ObjectId, ref: 'Place'}]
+    visited :[{type : Schema.Types.ObjectId, ref: 'Place'}]
 
 
 });
 
 
-module.exports=mongoose.model('Catalogue',catSchema);
+module.exports=mongoose.model('Trip',tripSchema);

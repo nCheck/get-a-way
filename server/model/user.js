@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Catalogue =require("./Catalogue");
+var Catalogue =require("./catalogue");
 
 var Schema = mongoose.Schema;
 
