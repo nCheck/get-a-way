@@ -1,0 +1,27 @@
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px;
+    width: 50%;
+    cursor: pointer;
+}
+.dropdownData {
+    background-color: rgb(0, 4, 247);
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 1%;
+    height: 1rem;
+    width: 50%;
+    cursor: pointer;
+}
