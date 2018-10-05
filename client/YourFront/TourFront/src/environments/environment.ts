@@ -3,16 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-   firebaseapp : {
-    apiKey: 'AIzaSyAEpJkdjJtMs5zBQF14JczZAFmuJki3Kcc',
-    authDomain: 'tourfront.firebaseapp.com',
-    databaseURL: 'https://tourfront.firebaseio.com',
-    projectId: 'tourfront',
-    storageBucket: 'tourfront.appspot.com',
-    messagingSenderId: '367200857790'
-  }
-
+  production: false
 };
 
 /*
