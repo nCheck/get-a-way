@@ -10,18 +10,26 @@ module.exports.startPlan = (req , res)=>{
         duration = req.body.duration,
         date = req.body.date;
     var email = 'n@gmail.com';
-    var newDate = Date.now;
+    console.log(req.params , req.body , "hello")
     User.findOne( { email : email } , (err , usr) =>{
         if(err){
             console.log(err)
         }
         else{
+            console.log(usr , "user")
             Trip.create( {
                 loc : [ lat , lon ] ,
-                date : newDate,
+                date : date,
                 duration: duration,
             } , (err , trip)=>{
                 usr.catalogue.push(trip._id)
+                if(!err){
+                    res.send("Done")
+                }
+                else{
+                    console.log(err)
+                    res.send(err)
+                }
             } )
         }
     })
