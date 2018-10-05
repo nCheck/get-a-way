@@ -131,27 +131,67 @@
 //   });
 
 
+// var lat = 19.0607
+// var lon = 72.8362
+// var dataListTourism = []
+
+// const https = require('https');
+//  var jrequest = require('request-json');
+// var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Tourist_Attraction&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+
+// var client = jrequest.createClient(urlTour);
+// client.get('', function(err, ress, body) 
+// {    
+//     var temp = body.results;
+    
+//     var len = 6;
+//     if(temp.length < len )
+//         len = temp.length
+
+//     for(var i = 0; i < len; i++) 
+//     {        
+//         var obj = temp[i];
+//         dataListTourism.push({
+//             name:obj.name,
+//             address:obj.formatted_address,
+//             lat:obj.geometry.location.lat,
+//             lan:obj.geometry.location.lng,
+//             icon:obj.icon,
+//             place_id:obj.place_id,
+//             comp_code:obj.plus_code.compound_code,
+//             global_code:obj.plus_code.global_code,
+//             rate:obj.rating
+//         });
+
+//         console.log(dataListTourism);
+//     }
+//   });
+
+
+// Pubs and clubs 
+
+
 var lat = 19.0607
 var lon = 72.8362
-var dataListTourism = []
+var dataListPubs = []
 
 const https = require('https');
  var jrequest = require('request-json');
-var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Tourist_Attraction&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Pubs&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
 
 var client = jrequest.createClient(urlTour);
 client.get('', function(err, ress, body) 
 {    
     var temp = body.results;
     
-    var len = 6;
-    if(temp.length < len )
-        len = temp.length
+    // var len = 6;
+    // if(temp.length < len )
+    //     len = temp.length
 
-    for(var i = 0; i < len; i++) 
+    for(var i = 0; i < temp.length; i++) 
     {        
         var obj = temp[i];
-        dataListTourism.push({
+        dataListPubs.push({
             name:obj.name,
             address:obj.formatted_address,
             lat:obj.geometry.location.lat,
@@ -163,7 +203,7 @@ client.get('', function(err, ress, body)
             rate:obj.rating
         });
 
-        console.log(dataListTourism);
+        console.log(dataListPubs);
     }
   });
 
