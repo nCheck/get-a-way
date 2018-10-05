@@ -7,12 +7,32 @@ import { RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './../environments/environment';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AuthGuard } from './auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 const appRoutes = [
-  {path : '', component : HomeComponent},
-  {path : 'loginsignup', component : LoginsignupComponent},
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path:'home',
+    component:HomeComponent,
+    canActivate: [AuthGuard],
+
+  },
   {path : 'header' , component : HeaderComponent},
+  {
+    path: 'login',
+    component: LoginsignupComponent,
+
+  },
 ];
 @NgModule({
   declarations: [
@@ -24,11 +44,15 @@ const appRoutes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
     FormsModule
   ],
-  providers: [DataService],
+  providers: [DataService,  AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
