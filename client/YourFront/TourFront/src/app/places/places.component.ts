@@ -30,4 +30,4 @@ export class PlacesComponent  implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
-}
+}}

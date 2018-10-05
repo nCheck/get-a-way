@@ -17,11 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
+import { MapsComponent } from './maps/maps.component';
+import { LoginsignupComponent } from './loginsignup/loginsignup.component';
+
+
 const appRoutes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    component: LoginsignupComponent
   },
   {
     path: 'home',
@@ -31,7 +34,10 @@ const appRoutes = [
   },
   {path : 'header' , component : HeaderComponent},
 
-  {path : 'places' , component : PlacesComponent}
+  {
+    path : 'places' , component : PlacesComponent},
+
+
 ];
 @NgModule({
   declarations: [
@@ -39,6 +45,8 @@ const appRoutes = [
     HeaderComponent,
     HomeComponent,
     PlacesComponent,
+    MapsComponent,
+    LoginsignupComponent
     
  ],
   imports: [
