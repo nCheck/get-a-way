@@ -10,6 +10,12 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get('/mood');
+    return this.http.get('/api/mood');
+  }
+  postMoodData(data: string) {
+     this.http.post('/api/setMood',
+      data
+    );
+    console.log('went');
   }
 }
