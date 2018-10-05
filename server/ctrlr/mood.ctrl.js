@@ -67,9 +67,69 @@ getFoodie = (lon , lat)=>{
  
 }
 
+relgiousData = (url)=>{
+
+    var client = jrequest.createClient(url),
+        dataListReligious = []
+
+    return new Promise( function(resolve , reject){
+
+        client.get('', function(err, ress, body) {
+            if(err){
+                console.log(err, "error")
+                reject(err)
+            }
+            else{
+                var temp = body.results
+        
+            
+                for(var i = 0; i < temp.length; i++) 
+                {        
+                    var obj = temp[i];
+                    dataListReligious.push({
+                        name:obj.name,
+                        address:obj.formatted_address,
+                        lat:obj.geometry.location.lat,
+                        lan:obj.geometry.location.lng,
+                        icon:obj.icon,
+                        place_id:obj.place_id,
+                        plus_comp_code:obj.plus_code.compound_code,
+                        plus_global_code:obj.plus_code.global_code,
+                        rate:obj.rating
+                    });
+        
+            
+                }
+                console.log(dataListReligious.length , " religious ");
+                resolve(dataListReligious)                
+            }
+          });
+    
+
+    })
+
+
+}
+
+getRelgious = async (lat , lon)=>{
+
+    var urlM = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=mosque&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+    var urlT = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=temple&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+    var urlC = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=church&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+
+    var urls = [urlM , urlC , urlT]
+    var s = await relgiousData(urlM) ,
+        ss = await relgiousData(urlT) ,
+        sss = await relgiousData(urlC) 
+    return [s , ss , sss]
+
+} 
 
 module.exports.getMoodData = async (req , res) =>{
-    var isFoodie = true
+    const { date , time , mood  } = req.body;
+    const { year , month , day } = date
+    const { isFoodie ,  isReligious , isParty , isAdventure , isEntertainment , isSightseeing } = mood
+    console.log(isFoodie ,  isReligious , isParty , isAdventure , isEntertainment , isSightseeing)
     var email = 'n@gmail.com'
     User.findOne( { email : email }).populate('catalogue').exec( async(err , usr) =>{
         if(err){
@@ -87,10 +147,14 @@ module.exports.getMoodData = async (req , res) =>{
             console.log(sTrip)
             var lat = sTrip[0].loc[0] , 
                 lon = sTrip[0].loc[1]
-            var suggestions = []
+            var suggestions = {}
             if( isFoodie ){
                 let bod = await getFoodie(lat , lon)
-                suggestions.push(bod)
+                suggestions.Foodie = bod
+            }
+            if( isReligious ){
+                let bod = await getRelgious(lat , lon)
+                suggestions.Religious = bod
             }     
             
             res.send(suggestions)
