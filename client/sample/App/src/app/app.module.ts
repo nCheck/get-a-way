@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 const appRoutes = [
   {path : '', component : HomeComponent},
   {path : 'about', component : AboutComponent},
@@ -31,6 +33,8 @@ const appRoutes = [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatButtonModule, MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
