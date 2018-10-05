@@ -16,6 +16,8 @@ import { AuthGuard } from './auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MyOwnCustomMaterialModule } from './material.module';
 const appRoutes = [
   {
     path: '',
@@ -43,9 +45,11 @@ const appRoutes = [
     HomeComponent,
     LoginsignupComponent,
     PlacesComponent,
-  ],
+ ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MyOwnCustomMaterialModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -58,4 +62,4 @@ const appRoutes = [
   providers: [DataService,  AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {  }

@@ -1,42 +1,41 @@
-<div class="container" style="margin-top : 15px">
+<div class="container" style="margin : 30px">
     <div class="row">
         <div class="div col-sm-4">
           <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active">
-                  Foodie
-              </a>
-                
-                  <ul class="list-group">
-                      <li class="list-group-item"><div class="form-group form-check" *ngFor="let place of placesArray.Foodie">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">{{place.name}} | {{place.starRate}}</label>
-                        </div><hr>
-                      </li>
-                    </ul>
+              <mat-card style="background-color: #ffb300">Foodie</mat-card>
+
+                    <mat-selection-list #shoes>
+                        <mat-list-option *ngFor="let place of placesArray.Foodie">
+                          {{place.name}}
+                        </mat-list-option>
+                      </mat-selection-list>
             </div>
         </div>
         <div class="div col-sm-4">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">
-                    Religious
-                </a>
-                <div *ngFor="let place of placesArray.Foodie">
-                <a href="#" class="list-group-item list-group-item-action">{{place.name}}</a>
+                <div class="list-group">
+                    <mat-card style="background-color: #ffb300">Religious</mat-card>
+      
+                          <mat-selection-list #shoes>
+                              <mat-list-option *ngFor="let place of placesArray.Foodie">
+                                {{place.name}}
+                              </mat-list-option>
+                            </mat-selection-list>
                   </div>
               </div>
-      
-          </div>
-          <div class="div col-sm-4">
-              <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action active">
-                      Party
-                  </a>
-                  <div *ngFor="let place of placesArray.Foodie">
-                  <a href="#" class="list-group-item list-group-item-action">{{place.name}}</a>
-                    </div>
-                </div>
-      
-         </div>
+              <div class="div col-sm-4">
+                    <div class="list-group">
+                        <mat-card style="background-color: #ffb300">Party</mat-card>
+          
+                              <mat-selection-list #shoes>
+                                  <mat-list-option *ngFor="let place of placesArray.Foodie">
+                                    {{place.name}}
+                                  </mat-list-option>
+                                </mat-selection-list>
+                      </div>
+                  </div>
+                  <br><br>
+                  <button class="btn btn-block btn-lg" color="accent" mat-button mat-raised-button (click)="openSnackBar('Submitted', 'Successful')">Show snack-bar</button>
+                  <div style="margin-bottom:15px"></div>
       </div>
 </div>
 

@@ -1,2 +1,19 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav [(opened)]="opened" mode="side">Sidenav content</mat-sidenav>
+    <mat-sidenav-content>
+            <mat-toolbar color="primary" > 
+                    
+                       
+                    <mat-toolbar-row>
+                            <p><button style="background-color : #fce4ec" mat-button mat-raised-button (click)="sidenav.toggle()"><i class="fas fa-sliders-h"></i></button></p>
+
+                      <span><a class="nav-link" routerLink="/places" style="color:white">Explore</a></span>
+                    </mat-toolbar-row>
+                  </mat-toolbar>
+                  
+           
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+ </mat-sidenav-container>
