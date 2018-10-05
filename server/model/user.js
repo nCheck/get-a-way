@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Catalogue =require("./catalogue");
+var Trip =require("./trip");
 
 var Schema = mongoose.Schema;
 
@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 var userSchema = new mongoose.Schema({
 	email : String,
 	isActive : Boolean ,
-	catalogue :[{type : Schema.Types.ObjectId, ref: 'Catalogue'}],
+	catalogue :[{type : Schema.Types.ObjectId, ref: 'Trip'}],
 });
 
 

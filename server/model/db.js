@@ -9,7 +9,6 @@ mongoose.connection.on('connected' , () =>{
 require('./review');
 require('./place');
 require('./trip');
-require('./catalogue');
 require('./user');
 require('./group')
 
