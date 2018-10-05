@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 
 
 var groupSchema = new mongoose.Schema({
-    trip_id : {
+    trip : {
         type : Schema.Types.ObjectId , ref : 'Trip'
     } ,
     member : [{ type : Schema.Types.ObjectId , ref : 'User' }]

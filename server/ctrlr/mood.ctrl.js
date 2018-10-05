@@ -4,7 +4,7 @@ var https = require('https')
 var jrequest = require('request-json');
 var User = mongoose.model('User'),
     Trip = mongoose.model('Trip')
-
+var sortJsonArray = require('sort-json-array');
 
 
 
@@ -100,7 +100,9 @@ relgiousData = (url)=>{
         
             
                 }
-                resolve(dataListReligious)                
+                sortCall = (a,b)=>{ return a.rate - b.rate }
+                dataListReligious.sort(sortCall)
+                resolve( sortJsonArray(dataListReligious , 'rate' , 'des') )                
             }
           });
     
@@ -119,17 +121,70 @@ getRelgious = async (lat , lon)=>{
     var urls = [urlM , urlC , urlT]
     var s = await relgiousData(urlM) ,
         ss = await relgiousData(urlT) ,
-        sss = await relgiousData(urlC) 
-    return [s , ss , sss]
+        sss = await relgiousData(urlC)
+    var ans = [...s , ...ss , ...sss] 
+    return ans
 
 } 
+
+getPubs = (lat , lon)=>{
+    var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Pubs&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+
+    var client = jrequest.createClient(urlTour);
+    var dataListPubs = []
+
+    return new Promise( function(resolve , reject){
+        client.get('', function(err, ress, body) 
+        {
+            if(err){
+                reject(err)
+            }
+            else{
+                var temp = body.results;
+            
+        
+                for(var i = 0; i < temp.length; i++) 
+                {        
+                    var obj = temp[i];
+                    dataListPubs.push({
+                        name:obj.name,
+                        address:obj.formatted_address,
+                        lat:obj.geometry.location.lat,
+                        lan:obj.geometry.location.lng,
+                        icon:obj.icon,
+                        place_id:obj.place_id,
+                        comp_code:obj.plus_code.compound_code,
+                        global_code:obj.plus_code.global_code,
+                        rate:obj.rating
+                    });
+            
+                    
+                }
+                resolve(dataListPubs)                
+            }
+
+        });
+    })    
+    
+}
+
+
+
+
+
+
+
 
 module.exports.getMoodData = async (req , res) =>{
     const { date , time , mood  } = req.body;
     const { year , month , day } = date
-    const { isFoodie ,  isReligious , isParty , isAdventure , isEntertainment , isSightseeing } = mood
+    const { isFoodie ,  isReligious , isParty , isEntertainment , isSightseeing } = mood
     console.log(isFoodie ,  isReligious , isParty , isAdventure , isEntertainment , isSightseeing)
-    var email = 'n@gmail.com'
+    var email = 'n@gmail.com',
+        isMood = true
+    if( !isFoodie &&  !isReligious && !isParty && !isEntertainment && !isSightseeing ){
+        isMood = false
+    }
     User.findOne( { email : email }).populate('catalogue').exec( async(err , usr) =>{
         if(err){
             console.log(err)
@@ -137,8 +192,11 @@ module.exports.getMoodData = async (req , res) =>{
         }
         else{
             var sTrip = [];
-            usr.catalogue.forEach( trip => {
+            usr.catalogue.forEach( (trip , i) => {
                 if( ! trip.isSuggested  ){
+                    usr.catalogue[i].isMood = isMood
+                    usr.catalogue[i].mood.concat([ isFoodie ,  isReligious , isParty , isEntertainment , isSightseeing ])
+                    usr.save();
                     sTrip.push(trip);
                     return;
                 }
@@ -147,14 +205,24 @@ module.exports.getMoodData = async (req , res) =>{
             var lat = sTrip[0].loc[0] , 
                 lon = sTrip[0].loc[1]
             var suggestions = {}
-            if( isFoodie ){
-                let bod = await getFoodie(lat , lon)
-                suggestions.Foodie = bod
+            if(isMood){
+                usr.save();
+                if( true ){
+                    let bod = await getFoodie(lat , lon)
+                    suggestions.Foodie = sortJsonArray(bod , 'starRate' , 'des')
+                }
+                if( true ){
+                    let bod = await getRelgious(lat , lon)
+                    suggestions.Religious = sortJsonArray(bod , 'rate' , 'des')
+                }
+                if( true ){
+                    let bod = await getPubs(lat , lon)
+                    suggestions.Party = sortJsonArray(bod , 'rate' , 'des')                
+                }                    
             }
-            if( isReligious ){
-                let bod = await getRelgious(lat , lon)
-                suggestions.Religious = bod
-            }     
+            else{
+
+            }
             
             res.send(suggestions)
         }
@@ -168,10 +236,18 @@ module.exports.getMoodData = async (req , res) =>{
 module.exports.dummyPlaces = async(req , res) =>{
     var lat = 19.0607,
         lon = 72.8362
-    suggestions = {}
-    let bod1 = await getFoodie(lat , lon)
-    suggestions.Foodie = bod1
-    let bod2 = await getRelgious(lat , lon)
-    suggestions.Religious = bod2
+    var suggestions = {}
+    if( true ){
+        let bod = await getFoodie(lat , lon)
+        suggestions.Foodie = sortJsonArray(bod , 'starRate' , 'des')
+    }
+    if( true ){
+        let bod = await getRelgious(lat , lon)
+        suggestions.Religious = sortJsonArray(bod , 'rate' , 'des')
+    }
+    if( true ){
+        let bod = await getPubs(lat , lon)
+        suggestions.Party = sortJsonArray(bod , 'rate' , 'des')                
+    } 
     res.send(suggestions)    
 }

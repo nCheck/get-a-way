@@ -31,7 +31,7 @@ var tripSchema = new mongoose.Schema({
         default : false
     } ,  
     mood : {
-        type : [String]
+        type : [Boolean]
     } , 
     
     visited :[{type : Schema.Types.ObjectId, ref: 'Place'}]
