@@ -22,7 +22,10 @@ var tripSchema = new mongoose.Schema({
         default : Date.now
     } , 
     duration : Number ,
-    isMood : Boolean ,  
+    isMood : {
+        type : Boolean,
+        default : false
+    } ,  
     mood : {
         type : [String]
     } , 
