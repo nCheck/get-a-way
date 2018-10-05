@@ -1,3 +1,46 @@
-<p>
-  home works!
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+      -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <div class="container-fluid" style="background-color: aqua;">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-9">
+
+                <ng-container *ngFor="let i of dropdowndata "  >
+                    <div >
+                        <button class="button "  (click)="dropdownclicked(i)" > <b>{{ i }}</b> </button>
+                        
+                        <ng-container *ngIf="show[indexOfDropdown(i)]">
+                                
+                            <ng-container>
+                                    <ng-container *ngFor="let j of dummydata "  >
+                                            <br>
+                                        <button class="dropdownData" style="color: red;">{{j}}</button>
+
+                                        </ng-container>
+                            </ng-container>
+                        </ng-container>
+                      </div>    
+                      <br>
+                  </ng-container>
+
+
+            </div>
+        </div>
+    </div>
+    
+</body>
+    
+
+</html>
