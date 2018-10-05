@@ -15,10 +15,10 @@ export class LoginsignupComponent implements OnInit {
   user: Observable<firebase.User>;
   doctors:any[];
   myParams: object = {};
-  constructor(db: AngularFireDatabase,public afAuth: AngularFireAuth, private router: Router) {
+  constructor(public db: AngularFireDatabase,public afAuth: AngularFireAuth, private router: Router) {
     this.user = afAuth.authState;
-    // db.list('/Users/Doctors').valueChanges().subscribe((val => {this.doctors = val;}))
-    // this.doctors = db.list('/doctors').push({name: "Ryan",uid: "7wfLyZWqBVVfWeFZbiDA99c04ka2", email:"Ryan@gmail.com", specialiation:"MD", phone:"9482374322" });
+    db.list('/users').valueChanges().subscribe((val => {this.doctors = val;}))
+
   }
 
   login() {
@@ -27,14 +27,20 @@ export class LoginsignupComponent implements OnInit {
     (success) => {
       var uid = firebase.auth().currentUser.uid
       var flag = false;
- 
+      //console.log(uid);
+      for(let doctor of this.doctors) {
+        if(doctor == uid) {
           flag = true;
           this.router.navigate(['/home']);
-
-      // if (flag == false)  {
-      //   console.log("New User");
-      //   this.router.navigate(['/register']);
-      // }
+          console.log('already reg');
+          break;
+        }
+      }
+      if (flag == false)  {
+        console.log("New User");
+        this.db.list('/users').push(uid);
+        this.router.navigate(['/home']);
+      }
 
     }).catch(
       (err) => {
