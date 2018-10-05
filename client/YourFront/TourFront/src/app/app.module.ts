@@ -1,5 +1,4 @@
 import { HomeComponent } from './home/home.component';
-import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { DataService } from './data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
@@ -18,7 +17,6 @@ import { FormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
-import { MapsComponent } from './maps/maps.component';
 const appRoutes = [
   {
     path: '',
@@ -32,29 +30,17 @@ const appRoutes = [
 
   },
   {path : 'header' , component : HeaderComponent},
-  {
-    path: 'login',
-    component: LoginsignupComponent,
 
-  },
-  {
-    path : 'places' ,
-    component : PlacesComponent
-  },
-  {
-    path : 'maps' , 
-    component : MapsComponent
-  }
-
+  {path : 'places' , component : PlacesComponent}
 ];
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    LoginsignupComponent,
     PlacesComponent,
-  ],
+    
+ ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
