@@ -6,58 +6,7 @@ var User = mongoose.model('User'),
     Trip = mongoose.model('Trip')
 
 
-//Food function
-// var lat = 19.0607
-// var lon = 72.8362 
-// var pd
-// var dataListFood = []
 
-// var url = 'https://developers.zomato.com/api/v2.1/search?count=10&lat='+lat+'&lon='+lon+'&radius=500'
-
-// var options = {
-// url: url ,
-// headers: {
-//     'user-key' : 'f0cabfc27a00bb0065e7eb6c99c6dcc8'
-//     }
-// };
-// request.get(
-// options,
-// function (error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//         //console.log(JSON.stringify(body))
-//         parsedData = JSON.stringify(body)
-//         pd = JSON.parse(body)
-//         pd = pd.restaurants
-
-//         //console.log(pd.restaurants[0])
-        
-//         for(var i = 0; i < pd.length; i++) {
-            
-//             var obj = pd[i];
-
-//             dataList.push({
-//                 name:obj.restaurant.name,
-//                 address:obj.restaurant.location.address,
-//                 locality:obj.restaurant.location.locality,
-//                 lat:obj.restaurant.location.latitude,
-//                 lon:obj.restaurant.location.longitude,
-//                 avgCost:obj.restaurant.average_cost_for_two,
-//                 cuisines:obj.restaurant.cuisines,
-//                 starRate:obj.restaurant.user_rating.aggregate_rating,
-//                wordRate:obj.restaurant.user_rating.rating_text
-//             });
-            
-//             //console.log(obj.restaurant.name+"  ");
-            
-//         }
-//         console.log(dataList);
-
-//     }
-//     else{
-//         console.log(error)
-//     }
-// }
-// );
 
 getFoodie = (lon , lat)=>{
     // var lon = req.params.lon , 
@@ -120,7 +69,7 @@ getFoodie = (lon , lat)=>{
 
 
 module.exports.getMoodData = async (req , res) =>{
-    
+    var isFoodie = true
     var email = 'n@gmail.com'
     User.findOne( { email : email }).populate('catalogue').exec( async(err , usr) =>{
         if(err){
@@ -137,17 +86,14 @@ module.exports.getMoodData = async (req , res) =>{
             });
             console.log(sTrip)
             var lat = sTrip[0].loc[0] , 
-                lon = sTrip[0].loc[1] 
-            //     url = `http://localhost:6007/api/getFoodie?lat=${lat}&lon=${lon}`
-            // var client = jrequest.createClient(url);
-            // var ans = "helo"
-           
-            // client.get('', function(err, ress, body) {
-            //     // console.log(body);
-            //     res.send(body)
-            //   });
-            var bod = await getFoodie(lat , lon)
-            res.send(bod)
+                lon = sTrip[0].loc[1]
+            var suggestions = []
+            if( isFoodie ){
+                let bod = await getFoodie(lat , lon)
+                suggestions.push(bod)
+            }     
+            
+            res.send(suggestions)
         }
     })    
 }

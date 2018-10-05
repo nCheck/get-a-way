@@ -18,8 +18,7 @@ router.route('/start')
 router.route('/setMood')
     .post(moodCtrl.getMoodData)
 
-// router.route('/getFoodie')
-//     .get(moodCtrl.getFoodie)
+
 
 
 
