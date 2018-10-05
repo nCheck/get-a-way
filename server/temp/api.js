@@ -65,22 +65,35 @@ var lon = 72.8362
 var dataListReligious = []
 
 const https = require('https');
+var jrequest = require('request-json');
 var urlM = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=mosque&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
 var urlT = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=temple&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
 var urlC = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=500&query=church&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
 
 
-https.get(urlM, (res) => {
+var client = jrequest.createClient(urlM);
+client.get('', function(err, ress, body) {
+    
+    var temp = body.results
 
+    
+    for(var i = 0; i < temp.length; i++) 
+    {        
+        var obj = temp[i];
+        dataListReligious.push({
+            name:obj.name,
+            address:obj.formatted_address,
+            lat:obj.geometry.location.lat,
+            lan:obj.geometry.location.lng,
+            icon:obj.icon,
+            place_id:obj.place_id,
+            plus_comp_code:obj.plus_code.compound_code,
+            plus_global_code:obj.plus_code.global_code,
+            rate:obj.rating
+        });
 
-  res.on('data', (d) => {
-    // process.stdout.write(d);
+        console.log(dataListReligious);
 
-    console.log(d)
-
+    }
   });
-
-}).on('error', (e) => {
-  console.error(e);
-});
 
