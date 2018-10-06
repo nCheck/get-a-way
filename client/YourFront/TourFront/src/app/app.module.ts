@@ -23,25 +23,20 @@ import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 
 const appRoutes = [
   {
-    path: 'login',
+    path: '',
     component: LoginsignupComponent
   },
   {
     path: 'home',
     component: HomeComponent,
-    // canActivate: [AuthGuard],
-
-  },
-  {
-    path: 'places',
-    component: PlacesComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
 
   },
   {path : 'header' , component : HeaderComponent},
 
   {
-    path : 'places' , component : PlacesComponent},
+    path : 'places' , component : PlacesComponent
+  },
 
 
 ];

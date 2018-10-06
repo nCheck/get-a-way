@@ -25,5 +25,13 @@ export class DataService {
   getPlacesData(): Observable<any> {
     return this.http.get('/api/places');
   }
+  postFormData(body) {
+    this.http.post('/api/maketrip', body,
+     this.options
+   ).subscribe(
+     dat => console.log(dat)
+   );
+   console.log('posted from data service');
+ }
 
 }
