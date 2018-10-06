@@ -1,0 +1,101 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" >
+<div class="container" style="margin : 30px">
+    <div class="row">
+            <a mat-raised-button style="background-color: #00cec9" class="btn  btn-lg btn-block" data-toggle="collapse" href="#foodie" role="button" aria-expanded="false" aria-controls="1"
+           >
+              Foods & Beverages</a>
+                <div class="col-md-12">
+                  <div class="collapse multi-collapse" id="foodie">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            <mat-card class style="background-color: #ffb300">Foods & Beverages</mat-card>
+              
+                                  <mat-selection-list #shoes  >
+                                      <mat-list-option (click)="onSelect(place)"   ngModel name="{{place}}"  *ngFor="let place of placesArray.Foodie">
+                                            {{place.name}}
+
+                                        
+                                      </mat-list-option>
+                                    </mat-selection-list>
+                          </div>                  
+                          </div>
+                  </div>
+               
+              
+        </div>
+      
+            <a mat-raised-button style="background-color: #00cec9" class="btn  btn-lg btn-block" data-toggle="collapse" href="#religious" role="button" aria-expanded="false" aria-controls="1"
+          
+            >Religious</a>
+
+          
+                <div class="col-md-12">
+                  <div class="collapse multi-collapse" id="religious">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            <mat-card style="background-color: #ffb300">Religious</mat-card>
+              
+                                  <mat-selection-list #shoes  >
+                                      <mat-list-option  *ngFor="let place of placesArray.Religious">
+                                        {{place.name}}
+                                      </mat-list-option>
+                                    </mat-selection-list>
+                          </div>                  
+                          </div>
+                  </div>
+               
+              </div>
+                  <a mat-raised-button style="background-color: #00cec9" class="btn  btn-lg btn-block" data-toggle="collapse" href="#party" role="button" aria-expanded="false" aria-controls="1"
+                      >
+                    Bars & Restaurants</a>
+
+                  
+                      <div class="col-md-12 ">
+                        <div class="collapse multi-collapse" id="party">
+                          <div class="card card-body">
+                              <div class="list-group">
+                                  <mat-card style="background-color: #ffb300">Bars & Restaurants</mat-card>
+                    
+                                        <mat-selection-list #shoes  >
+                                            <mat-list-option  *ngFor="let place of placesArray.Party">
+                                              {{place.name}}
+                                            </mat-list-option>
+                                          </mat-selection-list>
+                                </div>                  
+                                </div>
+                        
+                      </div>
+                    </div>
+
+
+                    <a mat-raised-button style="background-color: #00cec9" class="btn btn-lg btn-block" data-toggle="collapse" href="#sight" role="button" aria-expanded="false" aria-controls="1"
+                    matBadge="{{sightseeingLength}}" matBadgePosition="before" matBadgeColor="primary"
+                    >SightSeeing</a>
+
+                  
+                    <div class="col-md-12 ">
+                      <div class="collapse multi-collapse" id="sight">
+                        <div class="card card-body">
+                            <div class="list-group">
+                                <mat-card style="background-color: #ffb300">SightSeeing</mat-card>
+                  
+                                      <mat-selection-list #shoes  >
+                                          <mat-list-option  *ngFor="let place of placesArray.SightSeeing">
+                                            {{place.name}}
+                                          </mat-list-option>
+                                        </mat-selection-list>
+                              </div>                  
+                              </div>
+                      
+                    </div>
+                  </div>
+
+                      
+                  <br>
+                  <button class="btn btn-lg btn-block btn-dark"  type="submit"  mat-button mat-raised-button (click)="openSnackBar('Submitted', 'Successful')">Suggest a Trip Plan</button>
+                  <div style="margin-bottom:15px"></div>
+                  <br>
+                
+                
+      
+</div>

@@ -1,0 +1,74 @@
+<p>
+  maaps works!
+</p>
+
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+
+    <ng-container>
+      
+        <agm-polyline-point *ngFor="let point of latlang" [latitude]="point[0]" [longitude]="point[1]" >
+          <agm-marker setDestination(point[0],point[1]) [latitude]="point[0]" [longitude]="point[1]"></agm-marker>
+          <!-- <ui-gmap-polyline path="point[0],point[1]" stroke="map.polyline.stroke" visible='map.polyline.visible' geodesic='map.polyline.geodesic' fit="false"></ui-gmap-polyline> -->
+          <agm-direction [origin]="origin" [destination]="destination"> </agm-direction>
+          <ng-container setOrigin(point[0],point[1])></ng-container>
+        </agm-polyline-point>
+    
+  </ng-container>
+  
+
+</agm-map>
+
+
+
+
+<!-- <div class="container">
+  <h1>Angular 2 + Google Maps polyline </h1>
+  <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]=3>
+     <ng-container>
+       <agm-polyline *ngFor="let polyline of latlang;let i = index;"  >
+          
+      </agm-polyline>
+    </ng-container>
+  </agm-map>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <agm-map zoom="13" center="51.546550, 0.026345" >
+  <directions draggable="true"
+                   panel="directions-panel"
+                   ng-waypoints='ways'
+                   origin="51.546550, 0.026345"
+                   destination="51.5493953, 0.0412878">
+       </directions>               
+ </agm-map> 
+
+ --> 
+
+
+
+
+<!-- var flightPlanCoordinates = [
+{lat: 19.4946, lng: 72.8604},
+{lat: 19.2372, lng: 72.8441},
+{lat: 19.3919, lng: 72.8397},
+{lat: 19.4564, lng: 72.7925},
+{lat: 19.1136, lng:72.8697}
+]; -->
+
+<!-- <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script> -->

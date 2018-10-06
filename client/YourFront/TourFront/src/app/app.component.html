@@ -1,0 +1,32 @@
+
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav [(opened)]="opened" mode="side" style="background-color: goldenrod">
+         <mat-list role="list">
+                <mat-list-item role="listitem">                             
+                                <a style="color:white ; margin-right: 10px" routerLink="/home">Home</a>
+                <mat-list-item role="listitem">
+                                <a style="color:white" routerLink="/places">Places</a>                </mat-list-item>
+
+                </mat-list-item>
+               
+              </mat-list>
+              
+    </mat-sidenav>
+    <mat-sidenav-content>
+            <mat-toolbar color="primary" style="height:65px" > 
+                    
+                       
+                    <mat-toolbar-row>
+                            <div class="button-row">
+                                <button  mat-button mat-raised-button mat-fab color="accent" class="mr-5"  (click)="sidenav.toggle()"><i class="fas fa-bars"></i></button>
+                                <a style="color:white ; margin-right: 10px" routerLink="/home">Home</a>
+                                 <a style="color:white" routerLink="/places">Places</a>
+                              </div>
+                    </mat-toolbar-row>
+                  </mat-toolbar>
+                  
+           
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+ </mat-sidenav-container>
