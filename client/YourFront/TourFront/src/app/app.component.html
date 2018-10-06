@@ -4,16 +4,12 @@
     <mat-sidenav #sidenav [(opened)]="opened" mode="side" style="background-color: goldenrod">
          <mat-list role="list">
                 <mat-list-item role="listitem">                             
-                           <button mat-raised-button mat-mini-fab class="mr-5"><i class="fas fa-home"><a  routerLink="/home"></a></i></button>
-                </mat-list-item>
+                                <a style="color:white ; margin-right: 10px" routerLink="/home">Home</a>
                 <mat-list-item role="listitem">
-                        <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-user"> <a  routerLink="/login"></a></i></button>
+                                <a style="color:white" routerLink="/places">Places</a>                </mat-list-item>
 
                 </mat-list-item>
-                <mat-list-item role="listitem">
-                                <i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i>
-        
-                        </mat-list-item>
+               
               </mat-list>
               
     </mat-sidenav>

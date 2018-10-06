@@ -1,3 +1,4 @@
+import { PassformdataService } from './../passformdata.service';
 import { Router } from '@angular/router';
 import { DataService } from './../data.service';
 import { Component, OnInit, OnDestroy, Output , EventEmitter} from '@angular/core';
@@ -22,22 +23,31 @@ export class HomeComponent implements OnInit , OnDestroy {
   party = false;
   pubs = false;
   nearby = false;
+  lat: any;
+  lng: any;
   @Output() form1 = new EventEmitter<any[]>();
-  constructor(public data: DataService , private router: Router) {
+  constructor(public data: DataService , private router: Router , public passformdataService: PassformdataService) {
+    if (navigator) {
+    navigator.geolocation.getCurrentPosition( pos => {
+        this.lng = +pos.coords.longitude;
+        this.lat = +pos.coords.latitude;
+      });
+    }
   }
   ngOnInit() {
-    this.moodArray =  this.data.getData().subscribe(res => console.log(res));
-    console.log(this.moodArray);
+    // this.moodArray =  this.data.getData().subscribe(res => console.log(res));
+    // console.log(this.moodArray);
   }
   ngOnDestroy() {
-    this.moodArray.unsubscribe();
+    // this.moodArray.unsubscribe();
   }
   onSubmit(f: NgForm) {
-    console.log('submitted');
-     // this.data.postMoodData(f.value);
-      console.log(f.value);
-      this.router.navigate(['/places']);
+    
+      this.passformdataService.passFirstFormData({form1 : f.value , lat :  this.lat , lng : this.lng  }); 
+      console.log({form1 : f.value , lat :  this.lat , lng : this.lng  });
       console.log('went from home component ');
+      this.router.navigate(['/places']);
+     
   }
   toggleMeridian() {
       this.meridian = !this.meridian;

@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
 import { MapsComponent } from './maps/maps.component';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
+import { PassformdataService } from './passformdata.service';
 
 
 const appRoutes = [
@@ -62,8 +64,11 @@ const appRoutes = [
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+    })
   ],
-  providers: [DataService,  AuthGuard],
+  providers: [DataService,  AuthGuard , PassformdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {  }

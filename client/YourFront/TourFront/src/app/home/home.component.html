@@ -16,11 +16,16 @@
 
     <div class="container">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-       
+          
+<agm-map [latitude]="lat" [longitude]="lng"> 
+  <agm-marker [latitude]="lat"
+     [longitude]="lng"></agm-marker>
+</agm-map>
+
           
             <div ngModelGroup="datetime">
               <mat-form-field class="example-full-width">
-                  <input name="date" matInput [matDatepicker]="picker" placeholder="Choose a date" ngModel required/>
+                  <input  name="date" matInput [matDatepicker]="picker" placeholder="Choose a date" ngModel required/>
                   <mat-datepicker-toggle matSuffix [for]="picker">
                     <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                   </mat-datepicker-toggle>
@@ -30,15 +35,15 @@
                 <div  ngModelGroup="time">
                   
                         <mat-form-field class="example-full-width">
-                            <input type="number"  name="hour" matInput placeholder="hour" ngModel required maxlength="2"/><br>
+                            <input type="number" [ngModel]="2"  name="hour" matInput placeholder="hour" ngModel required maxlength="2"/><br>
                           </mat-form-field>
                           
                           <mat-form-field class="example-full-width">
-                          <input type="number" maxlength="2" name="minute" matInput placeholder="minutes" ngModel required/>
+                          <input type="number" [ngModel]="9"  maxlength="2" name="minute" matInput placeholder="minutes" ngModel required/>
                         </mat-form-field>
                         
                         <mat-form-field>
-                            <mat-select placeholder="AM/PM" name="meridian" [(value)]="selectedMeridian" name="meridian" ngModel required>
+                            <mat-select [ngModel]="PM" placeholder="AM/PM" name="meridian" [(value)]="selectedMeridian" name="meridian" ngModel required>
                               <mat-option value="AM">AM</mat-option>
                               <mat-option value="PM">PM</mat-option>
                             </mat-select>
@@ -49,18 +54,18 @@
                 
             
             <mat-form-field>
-              <mat-select placeholder="Enter duration" name="time" [(value)]="selected" name="duration" ngModel required>
-                <mat-option *ngFor="let d of duration" value="{{d}}">{{d}}</mat-option>
+              <mat-select  placeholder="Enter duration" name="time" [(value)]="selected" name="duration" ngModel required>
+                <mat-option [ngModel]="10" *ngFor="let d of duration" value="{{d}}">{{d}}</mat-option>
               </mat-select>
             </mat-form-field>
             <br> 
-            <!-- <div ngModelGroup="mood">
-                <mat-checkbox ngModel [(ngModel)]="foodies"  name="foodies">Foodies</mat-checkbox ><br>
+            <div ngModelGroup="mood">
+                <mat-checkbox ngModel [(ngModel)]="foodies"  name="foodies" [ngModel]=checked>Foodies</mat-checkbox ><br>
                 <mat-checkbox ngModel [(ngModel)]="religious" name="religious">Religious</mat-checkbox ><br>
                 <mat-checkbox ngModel [(ngModel)]="party" name="party">Party</mat-checkbox ><br>
                 <mat-checkbox ngModel [(ngModel)]="pubs" name="pubs">Pubs</mat-checkbox ><br>
                 <mat-checkbox ngModel [(ngModel)]="nearby" name="nearby">Nearby</mat-checkbox><br>
-          </div> -->
+          </div>
        
          
         <button  mat-button mat-raised-button color="accent" type="submit" class="btn btn-block" [disabled]="!f.valid">Proceed</button>
