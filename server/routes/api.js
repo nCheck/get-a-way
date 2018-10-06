@@ -30,5 +30,7 @@ router.route('/places')
 router.route('/addFriend')
     .post()
 
+router.route('/getWeather')
+    .get(usrCtrl.giveWeather)
 
 module.exports = router;
