@@ -8,7 +8,46 @@ var sortJsonArray = require('sort-json-array');
 
 
 
-getFoodie = (lon , lat)=>{
+getTour = (lat , lon)=>{{
+    var dataListTourism = []
+    var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Tourist_Attraction&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+
+
+    return new Promise( (resolve , reject)=>{
+        var client = jrequest.createClient(urlTour);
+        client.get('', function(err, ress, body) 
+        {
+            if( err ){
+                reject(err)
+            }    
+            var temp = body.results;
+            
+            var len = 6;
+            if(temp.length < len )
+                len = temp.length
+
+            for(var i = 0; i < len; i++) 
+            {        
+                var obj = temp[i];
+                dataListTourism.push({
+                    name:obj.name,
+                    address:obj.formatted_address,
+                    lat:obj.geometry.location.lat,
+                    lan:obj.geometry.location.lng,
+                    icon:obj.icon,
+                    place_id:obj.place_id,
+                    comp_code:obj.plus_code.compound_code,
+                    global_code:obj.plus_code.global_code,
+                    rate:obj.rating
+                });
+
+                resolve(dataListTourism);
+            }
+        });
+    })
+}}
+
+getFoodie = (lat , lon)=>{
     // var lon = req.params.lon , 
     //     lat = req.params.lat
     var url = 'https://developers.zomato.com/api/v2.1/search?count=10&lat='+lat+'&lon='+lon+'&radius=500';
@@ -38,15 +77,18 @@ getFoodie = (lon , lat)=>{
                         var obj = pd[i];
         
                         dataList.push({
+                            placeID:obj.restaurant.id,
                             name:obj.restaurant.name,
                             address:obj.restaurant.location.address,
                             locality:obj.restaurant.location.locality,
                             lat:obj.restaurant.location.latitude,
                             lon:obj.restaurant.location.longitude,
                             avgCost:obj.restaurant.average_cost_for_two,
+                            priceRange:obj.restaurant.price_range,
                             cuisines:obj.restaurant.cuisines,
                             starRate:obj.restaurant.user_rating.aggregate_rating,
-                           wordRate:obj.restaurant.user_rating.rating_text
+                           wordRate:obj.restaurant.user_rating.rating_text,
+                           thumbImg:obj.restaurant.thumb
                         });
                         
                         //console.log(obj.restaurant.name+"  ");
@@ -175,6 +217,7 @@ getPubs = (lat , lon)=>{
 
 
 
+
 module.exports.getMoodData = async (req , res) =>{
     const { date , time , mood  } = req.body;
     const { year , month , day } = date
@@ -207,17 +250,21 @@ module.exports.getMoodData = async (req , res) =>{
             var suggestions = {}
             if(isMood){
                 usr.save();
-                if( true ){
+                if( isFoodie ){
                     let bod = await getFoodie(lat , lon)
                     suggestions.Foodie = sortJsonArray(bod , 'starRate' , 'des')
                 }
-                if( true ){
+                if( isReligious ){
                     let bod = await getRelgious(lat , lon)
                     suggestions.Religious = sortJsonArray(bod , 'rate' , 'des')
                 }
-                if( true ){
+                if( isParty ){
                     let bod = await getPubs(lat , lon)
                     suggestions.Party = sortJsonArray(bod , 'rate' , 'des')                
+                }
+                if( isSightseeing ){
+                    let bod  =await getTour( lat , lon )
+                    suggestions.Sightseeing = sortJsonArray(bod , 'rate' , 'des')  
                 }                    
             }
             else{
@@ -248,7 +295,11 @@ module.exports.dummyPlaces = async(req , res) =>{
     if( true ){
         let bod = await getPubs(lat , lon)
         suggestions.Party = sortJsonArray(bod , 'rate' , 'des')                
-    } 
+    }
+    if( true ){
+        let bod  =await getTour( lat , lon )
+        suggestions.Sightseeing = sortJsonArray(bod , 'rate' , 'des')  
+    }       
     res.send(suggestions)    
 }
 

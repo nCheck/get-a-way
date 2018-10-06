@@ -130,11 +130,18 @@ module.exports.giveWeather = async(req , res)=>{
 
 module.exports.makeTrip = (req , res)=>{
 
-    var duration = req.body.duration,
-        date = req.body.date;
     var email = 'n@gmail.com';
     console.log(req.params , req.body , "hello")
-    const { name , lat , lon , starRate } = req.body
+    var form1 = req.body[0].form1,
+        form2 = req.body[1],
+        lat =  req.body[0].lat,
+        lon =  req.body[0].lon;
+    var date = new Date(form1.datetime.date) ,
+        time = form1.time
+    var hr = time.hour , min = time.minute , mer = time.meridian
+    time = hr*60*60 + min*60 + ( (mer == 'PM') ? 12*60*60 : 0 )
+    console.log(form1 , ' d')
+    console.log(form2 ,' s')
     User.findOne( { email : email } , (err , usr) =>{
         if(err){
             console.log(err)
