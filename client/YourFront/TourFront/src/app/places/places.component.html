@@ -1,41 +1,68 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" >
 <div class="container" style="margin : 30px">
     <div class="row">
-        <div class="div col-sm-4">
+        <div class="div col-sm-6">
           <div class="list-group">
               <mat-card style="background-color: #ffb300">Foodie</mat-card>
 
-                    <mat-selection-list #shoes>
-                        <mat-list-option *ngFor="let place of placesArray.Foodie">
+                    <mat-selection-list #shoes  >
+                        <mat-list-option  *ngFor="let place of placesArray.Foodie">
                           {{place.name}}
                         </mat-list-option>
                       </mat-selection-list>
             </div>
         </div>
-        <div class="div col-sm-4">
+        <div class="div col-sm-6">
                 <div class="list-group">
                     <mat-card style="background-color: #ffb300">Religious</mat-card>
       
                           <mat-selection-list #shoes>
-                              <mat-list-option *ngFor="let place of placesArray.Foodie">
+                              <mat-list-option *ngFor="let place of placesArray.Religious">
                                 {{place.name}}
                               </mat-list-option>
                             </mat-selection-list>
                   </div>
               </div>
-              <div class="div col-sm-4">
+              <div class="div col-sm-6">
                     <div class="list-group">
                         <mat-card style="background-color: #ffb300">Party</mat-card>
           
                               <mat-selection-list #shoes>
-                                  <mat-list-option *ngFor="let place of placesArray.Foodie">
+                                  <mat-list-option *ngFor="let place of placesArray.Party">
+                                    {{place.name}}
+                                  </mat-list-option>
+                                </mat-selection-list>
+                      </div>
+                  </div>
+                  <div class="div col-sm-6">
+                    <div class="list-group">
+                        <mat-card style="background-color: #ffb300">Pubs</mat-card>
+          
+                              <mat-selection-list #shoes>
+                                  <mat-list-option *ngFor="let place of placesArray.Party">
+                                    {{place.name}}
+                                  </mat-list-option>
+                                </mat-selection-list>
+                      </div>
+                  </div>
+                  <div class="div col-sm-6">
+                    <div class="list-group">
+                        <mat-card style="background-color: #ffb300">Most Popular Nearby</mat-card>
+          
+                              <mat-selection-list #shoes>
+                                  <mat-list-option *ngFor="let place of placesArray.Party">
                                     {{place.name}}
                                   </mat-list-option>
                                 </mat-selection-list>
                       </div>
                   </div>
                   <br><br>
+                  
                   <button class="btn btn-block btn-lg" color="accent" mat-button mat-raised-button (click)="openSnackBar('Submitted', 'Successful')">Show snack-bar</button>
                   <div style="margin-bottom:15px"></div>
+                  
+                
+                
       </div>
 </div>
 

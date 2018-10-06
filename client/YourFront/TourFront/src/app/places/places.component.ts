@@ -17,6 +17,7 @@ export class PlacesComponent  implements OnInit {
   animal: string;
   name: string;
   placesArray: any[] ;
+  panelOpenState = false;
   constructor(public data: DataService , public snackBar: MatSnackBar) { }
 
   ngOnInit() {

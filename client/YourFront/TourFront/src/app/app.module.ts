@@ -13,7 +13,7 @@ import { environment } from './../environments/environment';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AuthGuard } from './auth.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
@@ -24,13 +24,19 @@ import { MaapsComponent } from './maaps/maaps.component';
 
 const appRoutes = [
   {
-    path: '',
+    path: 'login',
     component: LoginsignupComponent
   },
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+
+  },
+  {
+    path: 'places',
+    component: PlacesComponent,
+    // canActivate: [AuthGuard],
 
   },
   {path : 'header' , component : HeaderComponent},
@@ -56,8 +62,8 @@ const appRoutes = [
  ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     MyOwnCustomMaterialModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
