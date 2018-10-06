@@ -5,7 +5,8 @@ const dir    = __dirname;
 var MOODS = require('../mood.data')
 var regCtrl = require('../ctrlr/reg.ctrl'),
     moodCtrl = require('../ctrlr/mood.ctrl'),
-    usrCtrl = require('../ctrlr/usr.ctrl')
+    usrCtrl = require('../ctrlr/usr.ctrl'),
+    calcCtrl = require('../ctrlr/calc.ctrl')
 
 
 
@@ -33,4 +34,8 @@ router.route('/addFriend')
 router.route('/getWeather')
     .get(usrCtrl.giveWeather)
 
+router.route('/getPath')
+    .get(calcCtrl.getBestPath)
+
+    
 module.exports = router;

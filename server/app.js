@@ -2,9 +2,11 @@ var express               = require('express');
 var parser                = require('body-parser');
 var mongoose              = require('mongoose');
 var app		               	=express();
+var path = require('path')
 
 const dir                 = __dirname;
-var port = process.env.PORT || 6007;
+app.use("/ctrl" , express.static(dir + '/ctrlr'));
+var port = process.env.PORT || 6006;
 require('./model/db.js');
 
 //Getting Routes
