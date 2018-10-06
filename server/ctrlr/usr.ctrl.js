@@ -5,6 +5,14 @@ var jrequest = require('request-json');
 var User = mongoose.model('User'),
     Trip = mongoose.model('Trip')
 
+//Hello
+getElevation = (lat , lon)=>{
+    return new Promise( (resolve , reject)=>{
+        var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=0eab9f6fc9a3f1ab2bb6212e5f4fceb0`
+        var client = jrequest.createClient(url)
+        console.log('Hllo')        
+    } )
+}
 
 getWeather = (lat , lon) => {
     return new Promise( (resolve , reject)=>{
@@ -54,7 +62,7 @@ module.exports.giveWeather = async(req , res)=>{
         endT = startT + duration*3600 
         weather = await getWeather(lat , lon)
         console.log('start ' ,startT , 'endT ' , endT)
-        var schd = [] , forcast = []
+        var schd = [] , forcast = [] , alti = []
         weather.forEach( (we)=>{
             if ( we.dt > endT )
             return;
