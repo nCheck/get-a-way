@@ -1,15 +1,35 @@
 
 
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav [(opened)]="opened" mode="side">Sidenav content</mat-sidenav>
+    <mat-sidenav #sidenav [(opened)]="opened" mode="side" style="background-color: goldenrod">
+         <mat-list role="list">
+                <mat-list-item role="listitem">                             
+                           <button mat-raised-button mat-mini-fab class="mr-5"><i class="fas fa-home"><a  routerLink="/home"></a></i></button>
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                        <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-user"> <a  routerLink="/login"></a></i></button>
+
+                </mat-list-item>
+                <mat-list-item role="listitem">
+                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i></button>
+        
+                        </mat-list-item>
+              </mat-list>
+              
+    </mat-sidenav>
     <mat-sidenav-content>
-            <mat-toolbar color="primary" > 
+            <mat-toolbar color="primary" style="height:65px" > 
                     
                        
                     <mat-toolbar-row>
-                            <p><button style="background-color : #fce4ec" mat-button mat-raised-button (click)="sidenav.toggle()"><i class="fas fa-sliders-h"></i></button></p>
+                            <div class="button-row">
+                                <button  mat-button mat-raised-button mat-fab color="accent" class="mr-5"  (click)="sidenav.toggle()"><i class="fas fa-bars"></i></button>
+                                <button mat-raised-button mat-mini-fab class="mr-5"><i class="fas fa-home"><a  routerLink="/home"></a></i></button>
+                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-user"> <a  routerLink="/login"></a></i></button>
+                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i></button>
 
-                      <span><a class="nav-link" routerLink="/places" style="color:white">Explore</a></span>
+                                
+                              </div>
                     </mat-toolbar-row>
                   </mat-toolbar>
                   

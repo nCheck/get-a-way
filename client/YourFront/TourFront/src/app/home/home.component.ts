@@ -11,7 +11,17 @@ import { NgForm } from '@angular/forms';
 
 export class HomeComponent implements OnInit , OnDestroy {
   moodArray: Subscription;
-  moodArray2 = ['Foodie', 'Religious', 'Party', 'Adventure', 'Entertainment', 'Sightseeing'];
+  moodArray2 = ['Foodie', 'Religious', 'Party', 'Adventure', 'Entertainment', 'Sightseeing:'];
+  duration: number[] = [2, 4, 6, 8, 10, 12];
+  minDate = Date.now();
+  maxDate = new Date(2020, 0, 1);
+  time = {hour: 13, minute: 30};
+  meridian = true;
+  foodies = false;
+  religious = false;
+  party = false;
+  pubs = false;
+  nearby = false;
   constructor(public data: DataService , private router: Router) {
   }
   ngOnInit() {
@@ -22,9 +32,14 @@ export class HomeComponent implements OnInit , OnDestroy {
     this.moodArray.unsubscribe();
   }
   onSubmit(f: NgForm) {
-      this.data.postMoodData(f.value);
-      console.log(f.value + 'Form data sent');
-      this.router.navigate(['/places']);
+    console.log('submitted');
+     // this.data.postMoodData(f.value);
+      console.log(f.value);
+      // this.router.navigate(['/places']);
+      console.log('went from home component ');
+  }
+  toggleMeridian() {
+      this.meridian = !this.meridian;
   }
 
 }

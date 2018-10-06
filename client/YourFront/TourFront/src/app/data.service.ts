@@ -20,7 +20,7 @@ export class DataService {
     ).subscribe(
       dat => console.log(dat)
     );
-    console.log('went');
+    console.log('posted from data service');
   }
   getPlacesData(): Observable<any> {
     return this.http.get('/api/places');
