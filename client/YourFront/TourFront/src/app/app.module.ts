@@ -20,6 +20,8 @@ import { MyOwnCustomMaterialModule } from './material.module';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { AgmCoreModule } from '@agm/core';
 import { MaapsComponent } from './maaps/maaps.component';
+import { AgmDirectionModule } from 'agm-direction'
+
 
 
 const appRoutes = [
@@ -72,6 +74,7 @@ const appRoutes = [
     RouterModule.forRoot(appRoutes),
     NgbModule,
     FormsModule,
+    AgmDirectionModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
     })
