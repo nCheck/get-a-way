@@ -1,23 +1,38 @@
-<p>
-  maaps works!
-</p>
 
-<agm-map [latitude]="lat" [longitude]="lng">
+
+<button type="button" class="btn" style="margin-left:130px">Book A Cab</button>
+
+<div class="container">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+     <ng-container>
+       <agm-polyline *ngFor="let polyline of polylines;let i = index;"  [strokeColor]="polyline.color">
+          <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+              <agm-marker [latitude]="point.latitude" [longitude]="point.longitude"></agm-marker>
+          </agm-polyline-point>
+      </agm-polyline>
+    </ng-container>
+  </agm-map>
+</div>
+
+
+
+
+<!-- <agm-map [latitude]="lat" [longitude]="lng">
   <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
 
     <ng-container>
       
         <agm-polyline-point *ngFor="let point of latlang" [latitude]="point[0]" [longitude]="point[1]" >
-          <agm-marker setDestination(point[0],point[1]) [latitude]="point[0]" [longitude]="point[1]"></agm-marker>
+          <agm-marker setDestination(point[0],point[1]) [latitude]="point[0]" [longitude]="point[1]"></agm-marker> -->
           <!-- <ui-gmap-polyline path="point[0],point[1]" stroke="map.polyline.stroke" visible='map.polyline.visible' geodesic='map.polyline.geodesic' fit="false"></ui-gmap-polyline> -->
-          <agm-direction [origin]="origin" [destination]="destination"> </agm-direction>
+          <!-- <agm-direction [origin]="origin" [destination]="destination"> </agm-direction>
           <ng-container setOrigin(point[0],point[1])></ng-container>
         </agm-polyline-point>
     
   </ng-container>
   
 
-</agm-map>
+</agm-map> -->
 
 
 

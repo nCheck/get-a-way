@@ -20,7 +20,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { PassformdataService } from './passformdata.service';
-import { AgmCoreModule } from '@agm/core';
 import { MaapsComponent } from './maaps/maaps.component';
 import { AgmDirectionModule } from 'agm-direction'
 
@@ -74,8 +73,8 @@ const appRoutes = [
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
-    })
-    AgmDirectionModule,
+    }),
+    AgmDirectionModule
   ],
   providers: [DataService,  AuthGuard , PassformdataService],
   bootstrap: [AppComponent]

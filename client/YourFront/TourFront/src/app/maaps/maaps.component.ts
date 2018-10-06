@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { AgmDirectionModule } from 'agm-direction'
-import { AgmCoreModule } from '@agm/core';
+import { Component, ElementRef, NgModule, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+
+
+
 @Component({
   selector: 'app-maaps',
   templateUrl: './maaps.component.html',
@@ -10,47 +15,96 @@ import { AgmCoreModule } from '@agm/core';
 
 
 export class MaapsComponent implements OnInit {
-
-  title: string = 'My first AGM project';
-  lat: number = 19.4946;
-  lng: number = 72.8604;
-
-  color = "red"
-
-  // lati: any[] = [19.4946,19.2372,19.3919,19.4564,19.1136]
-  // longi: any[] = [72.8604,72.8441,72.8397,72.7925,72.8697]
-
-  arry1: any[] = [19.4946,72.8604]
-  arry2: any[] = [19.2372, 72.8441]
-  arry3: any[] = [19.3919, 72.8397]
-  arry4: any[] = [19.4564,72.7925]
-  arry5: any[] = [19.1136,72.8697]
-
-  latlang: any[]
-  public origin: any
-  public destination: any
-
-  constructor() {
-  }
-
-  ngOnInit() {  
-
-    this.latlang = [this.arry1,this.arry2,this.arry3,this.arry4,this.arry5]
-    console.log(this.latlang)
-   // console.log(this.arry1[0])
-    console.log(this.latlang[0][0])
-    this.setOrigin(this.lat,this.lng)
-  }
   
+  public latitude: number;
+  public longitude: number;
+  public maxSpeed: number;
+  public zoom: number;
+  public polyline: Array<any>;
+  public polylines: Array<any>;
+  
+  
+  constructor(
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) {}
+  
+  ngOnInit() {
+    //set google maps defaults
+    this.zoom = 3;
+    this.maxSpeed = 40;
+    this.latitude = 21.291;
+    this.longitude = -122.214;
 
-setDestination(x:Number,y:Number){
-  this.destination={ lat:x , lng:y }
-}
-setOrigin(x:Number,y:Number){
-  this.origin={lat:x,lng:y}
-}
+    this.polyline = [
+        {
+            latitude:  19.4946,
+            longitude: 72.8604,
+            speed: 20
+        },
+         {
+            latitude:  19.2372,
+            longitude: 72.8441,
+            speed: 20
+        },
+
+        {
+            latitude: 19.3919,
+            longitude: 72.8397,
+            speed: 20
+        },
+        {
+            latitude: 19.4564,
+            longitude: 72.7925,
+            speed: 20
+        },
+        {
+            latitude: 19.1136,
+            longitude: 72.8697,
+            speed: 20
+        }
+    ]
+    this.polylines = this.rebuildPolylines();
  
+    
+    //set current position
+    this.setCurrentPosition();
+    
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
 
-
+    });
+  }
+  private rebuildPolylines() {
+    let polylines = [];
+    let i = 0;
+    let newPolyline = {path: [], color: 'blue'};
+    for (let point of this.polyline) {
+      console.log(point)
+      newPolyline.path.push(point);
+      const speedChanged = this.polyline[i+1] && (point.speed < this.maxSpeed && this.polyline[i+1].speed < this.maxSpeed) ||(point.speed > this.maxSpeed && this.polyline[i+1].speed > this.maxSpeed )
+      if (point.speed > this.maxSpeed) {
+        newPolyline.color = 'red';
+      }
+      if (speedChanged) {
+        newPolyline.path.push( this.polyline[i+1] );
+        polylines.push(newPolyline);
+        newPolyline = {path: [], color: 'blue'};
+      }
+      i++;
+    }
+    console.log(polylines);
+    return polylines;
+    
+  }
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
+  }
 }
 
