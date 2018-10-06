@@ -251,3 +251,16 @@ module.exports.dummyPlaces = async(req , res) =>{
     } 
     res.send(suggestions)    
 }
+
+
+
+
+module.exports.sendCO = (req , res)=>{
+    lat = [ 19.385430 , 19.1136 , 19.2241 , 18.9220 ]
+    lon = [ 72.828738 , 72.8697,72.8666 , 72.8347 ]
+    dict = {}
+    for( i = 0 ; i < 3 ; i++){
+        dict[i] = [ lat[i], lon[i] ]; 
+    }
+    res.send( dict)    
+}

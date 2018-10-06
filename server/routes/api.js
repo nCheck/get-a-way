@@ -36,4 +36,8 @@ router.route('/getWeather')
 router.route('/makeTrip')
     .post(usrCtrl.makeTrip)
 
+
+router.route('/getCO')
+    .get( moodCtrl.sendCO )
+
 module.exports = router;
