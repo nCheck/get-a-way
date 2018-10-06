@@ -1,0 +1,28 @@
+<p>
+  maaps works!
+</p>
+
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+
+    <ng-container>
+      
+        <agm-polyline-point *ngFor="let point of latlang" [latitude]="point[0]" [longitude]="point[1]">
+        </agm-polyline-point>
+    
+  </ng-container>
+  
+
+</agm-map>
+
+<!-- var flightPlanCoordinates = [
+{lat: 19.4946, lng: 72.8604},
+{lat: 19.2372, lng: 72.8441},
+{lat: 19.3919, lng: 72.8397},
+{lat: 19.4564, lng: 72.7925},
+{lat: 19.1136, lng:72.8697}
+]; -->
+
+<!-- <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script> -->

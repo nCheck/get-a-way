@@ -17,8 +17,9 @@ import { FormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
-import { MapsComponent } from './maps/maps.component';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
+import { AgmCoreModule } from '@agm/core';
+import { MaapsComponent } from './maaps/maaps.component';
 
 
 const appRoutes = [
@@ -37,6 +38,10 @@ const appRoutes = [
   {
     path : 'places' , component : PlacesComponent},
 
+    {
+      path : 'maps' , component : MaapsComponent
+    }
+
 
 ];
 @NgModule({
@@ -45,8 +50,8 @@ const appRoutes = [
     HeaderComponent,
     HomeComponent,
     PlacesComponent,
-    MapsComponent,
-    LoginsignupComponent
+    LoginsignupComponent,
+    MaapsComponent
     
  ],
   imports: [
@@ -60,7 +65,10 @@ const appRoutes = [
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
+    })
   ],
   providers: [DataService,  AuthGuard],
   bootstrap: [AppComponent]
