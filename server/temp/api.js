@@ -176,7 +176,7 @@ var lon = 72.8362
 var dataListPubs = []
 
 const https = require('https');
- var jrequest = require('request-json');
+var jrequest = require('request-json');
 var urlTour = 'https://maps.googleapis.com/maps/api/place/textsearch/json?location='+lat+','+lon+'&radius=1000&query=Pubs&language=en&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
 
 var client = jrequest.createClient(urlTour);
