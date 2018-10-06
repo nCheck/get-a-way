@@ -18,9 +18,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlacesComponent } from './places/places.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyOwnCustomMaterialModule } from './material.module';
-import { MapsComponent } from './maps/maps.component';
 import { LoginsignupComponent } from './loginsignup/loginsignup.component';
 import { PassformdataService } from './passformdata.service';
+import { AgmCoreModule } from '@agm/core';
+import { MaapsComponent } from './maaps/maaps.component';
+import { AgmDirectionModule } from 'agm-direction'
+
 
 
 const appRoutes = [
@@ -40,6 +43,10 @@ const appRoutes = [
     path : 'places' , component : PlacesComponent
   },
 
+    {
+      path : 'maps' , component : MaapsComponent
+    }
+
 
 ];
 @NgModule({
@@ -48,8 +55,9 @@ const appRoutes = [
     HeaderComponent,
     HomeComponent,
     PlacesComponent,
-    MapsComponent,
-    LoginsignupComponent
+    LoginsignupComponent,
+    MaapsComponent
+    
  ],
   imports: [
     BrowserModule,
@@ -67,6 +75,7 @@ const appRoutes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw'
     })
+    AgmDirectionModule,
   ],
   providers: [DataService,  AuthGuard , PassformdataService],
   bootstrap: [AppComponent]
