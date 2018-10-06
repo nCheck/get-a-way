@@ -10,6 +10,7 @@ var groupSchema = new mongoose.Schema({
     trip : {
         type : Schema.Types.ObjectId , ref : 'Trip'
     } ,
+    leader: String , 
     member : [{ type : Schema.Types.ObjectId , ref : 'User' }]
 });
 
