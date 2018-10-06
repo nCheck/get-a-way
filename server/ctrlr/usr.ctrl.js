@@ -8,9 +8,17 @@ var User = mongoose.model('User'),
 //Hello
 getElevation = (lat , lon)=>{
     return new Promise( (resolve , reject)=>{
-        var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=0eab9f6fc9a3f1ab2bb6212e5f4fceb0`
+        var url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${lat},${lon}&key=AIzaSyDmk0ZLNenVOm3-bcdIHiMm2nBkSrdKLxw`
         var client = jrequest.createClient(url)
-        console.log('Hllo')        
+        client.get('', function(err, ress, body) {
+            if(err){
+                console.log(err, "error")
+                reject(err)
+            }
+            else{
+                resolve( body.results )                
+            }
+          });        
     } )
 }
 
@@ -25,8 +33,8 @@ getWeather = (lat , lon) => {
                 reject(err)
             }
             else{
-                var temp = body.list
-                resolve( temp )                
+                console.log(body)
+                resolve( body.list )                
             }
           });
 
@@ -45,7 +53,7 @@ module.exports.giveWeather = async(req , res)=>{
 
     User.findOne( { email : email }).populate('catalogue').exec( async(err , usr)=>{
         var trips = usr.catalogue
-        var date , lat , lon , duration
+        var date , lat , lon , duration, ele , elevation
         trips.forEach( async(ele) => {
             if ( !ele.isActive ){
                 date = ele.date
@@ -55,12 +63,14 @@ module.exports.giveWeather = async(req , res)=>{
                 return;
             }
         });
-        lat = 82.8628
-        lon = 135.0000
+        lat = 31.1048
+        lon = 77.1734
         date = new Date(date)
         var startT = date.getTime()/1000 , endT
         endT = startT + duration*3600 
         weather = await getWeather(lat , lon)
+        ele = await getElevation(lat , lon)
+        ele = ele[0].elevation
         console.log('start ' ,startT , 'endT ' , endT)
         var schd = [] , forcast = [] , alti = []
         weather.forEach( (we)=>{
@@ -80,6 +90,9 @@ module.exports.giveWeather = async(req , res)=>{
             suggest.push('Sweater')
             suggest.push('Jacket')
             suggest.push('Thermal')
+        }
+        if( ele > 2099 ){
+            suggest.push('Medical Permission for High Altitude')
         }
         console.log(suggest)
         res.send(schd)
