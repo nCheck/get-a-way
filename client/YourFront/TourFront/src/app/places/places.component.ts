@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Inject} from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { NgForm } from '@angular/forms';
 
 export interface DialogData {
   animal: string;
@@ -18,6 +19,8 @@ export class PlacesComponent  implements OnInit {
   name: string;
   placesArray: any[] ;
   panelOpenState = false;
+  placesSelectedArray: any[] = [];
+
   constructor(public data: DataService , public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -31,4 +34,16 @@ export class PlacesComponent  implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
-}}
+}
+onSubmit(f: NgForm) {
+  this.data.postFormData(this.placesSelectedArray);
+}
+onSelect(placeSelected: any) {
+  if (this.placesSelectedArray.length <= 5 ) {
+    console.log(placeSelected);
+    this.placesSelectedArray.push(placeSelected);
+    console.log(this.placesSelectedArray);
+  }
+
+}
+}

@@ -2,67 +2,126 @@
 <div class="container" style="margin : 30px">
     <div class="row">
         <div class="div col-sm-6">
-          <div class="list-group">
+          <!-- <div class="list-group">
               <mat-card style="background-color: #ffb300">Foodie</mat-card>
+              <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Toggle first element</a>
 
                     <mat-selection-list #shoes  >
                         <mat-list-option  *ngFor="let place of placesArray.Foodie">
                           {{place.name}}
                         </mat-list-option>
                       </mat-selection-list>
-            </div>
+            </div> -->
+            <a class="btn btn-primary" data-toggle="collapse" href="#foodie" role="button" aria-expanded="false" aria-controls="1">Foods & Beverages</a>
+
+            <div class="row">
+                <div class="col">
+                  <div class="collapse multi-collapse" id="foodie">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            <mat-card style="background-color: #ffb300">Foods & Beverages</mat-card>
+              
+                                  <mat-selection-list #shoes  >
+                                      <mat-list-option (click)="onSelect(place)"   ngModel name="{{place}}"  *ngFor="let place of placesArray.Foodie">
+                                        {{place.name}}
+                                      </mat-list-option>
+                                    </mat-selection-list>
+                          </div>                  
+                          </div>
+                  </div>
+                </div>
+              </div>
         </div>
         <div class="div col-sm-6">
-                <div class="list-group">
-                    <mat-card style="background-color: #ffb300">Religious</mat-card>
-      
-                          <mat-selection-list #shoes>
-                              <mat-list-option *ngFor="let place of placesArray.Religious">
-                                {{place.name}}
-                              </mat-list-option>
-                            </mat-selection-list>
+            <a class="btn btn-primary" data-toggle="collapse" href="#religious" role="button" aria-expanded="false" aria-controls="1">Religious</a>
+
+            <div class="row">
+                <div class="col">
+                  <div class="collapse multi-collapse" id="religious">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            <mat-card style="background-color: #ffb300">Religious</mat-card>
+              
+                                  <mat-selection-list #shoes  >
+                                      <mat-list-option  *ngFor="let place of placesArray.Religious">
+                                        {{place.name}}
+                                      </mat-list-option>
+                                    </mat-selection-list>
+                          </div>                  
+                          </div>
                   </div>
+                </div>
+              </div>
               </div>
               <div class="div col-sm-6">
-                    <div class="list-group">
-                        <mat-card style="background-color: #ffb300">Party</mat-card>
-          
-                              <mat-selection-list #shoes>
-                                  <mat-list-option *ngFor="let place of placesArray.Party">
-                                    {{place.name}}
-                                  </mat-list-option>
-                                </mat-selection-list>
+                  <a class="btn btn-primary" data-toggle="collapse" href="#party" role="button" aria-expanded="false" aria-controls="1">Bars & Restaurants</a>
+
+                  <div class="row">
+                      <div class="col">
+                        <div class="collapse multi-collapse" id="party">
+                          <div class="card card-body">
+                              <div class="list-group">
+                                  <mat-card style="background-color: #ffb300">Bars & Restaurants</mat-card>
+                    
+                                        <mat-selection-list #shoes  >
+                                            <mat-list-option  *ngFor="let place of placesArray.Party">
+                                              {{place.name}}
+                                            </mat-list-option>
+                                          </mat-selection-list>
+                                </div>                  
+                                </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
                   <div class="div col-sm-6">
-                    <div class="list-group">
-                        <mat-card style="background-color: #ffb300">Pubs</mat-card>
-          
-                              <mat-selection-list #shoes>
-                                  <mat-list-option *ngFor="let place of placesArray.Party">
-                                    {{place.name}}
-                                  </mat-list-option>
-                                </mat-selection-list>
-                      </div>
+                      <a class="btn btn-primary" data-toggle="collapse" href="#pubs" role="button" aria-expanded="false" aria-controls="1">Pubs</a>
+
+            <div class="row">
+                <div class="col">
+                  <div class="collapse multi-collapse" id="pubs">
+                    <div class="card card-body">
+                        <div class="list-group">
+                            <mat-card style="background-color: #ffb300">Pubs</mat-card>
+              
+                                  <mat-selection-list #shoes  >
+                                      <mat-list-option  *ngFor="let place of placesArray.Foodie">
+                                        {{place.name}}
+                                      </mat-list-option>
+                                    </mat-selection-list>
+                          </div>                  
+                          </div>
+                  </div>
+                </div>
+              </div>
                   </div>
                   <div class="div col-sm-6">
-                    <div class="list-group">
-                        <mat-card style="background-color: #ffb300">Most Popular Nearby</mat-card>
-          
-                              <mat-selection-list #shoes>
-                                  <mat-list-option *ngFor="let place of placesArray.Party">
-                                    {{place.name}}
-                                  </mat-list-option>
-                                </mat-selection-list>
-                      </div>
+                      <a class="btn btn-primary" data-toggle="collapse" href="#nearby" role="button" aria-expanded="false" aria-controls="1">Nearby</a>
+
+                      <div class="row">
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="nearby">
+                              <div class="card card-body">
+                                  <div class="list-group">
+                                      <mat-card style="background-color: #ffb300">Nearby</mat-card>
+                        
+                                            <mat-selection-list #shoes  >
+                                                <mat-list-option  *ngFor="let place of placesArray.Foodie">
+                                                  {{place.name}}
+                                                </mat-list-option>
+                                              </mat-selection-list>
+                                    </div>                  
+                                    </div>
+                            </div>
+                          </div>
+                        </div>
                   </div>
                   <br><br>
                   
-                  <button class="btn btn-block btn-lg" color="accent" mat-button mat-raised-button (click)="openSnackBar('Submitted', 'Successful')">Show snack-bar</button>
+                  <button type="submit" class="btn btn-block btn-lg" color="accent" mat-button mat-raised-button (click)="openSnackBar('Submitted', 'Successful')">Proceed</button>
                   <div style="margin-bottom:15px"></div>
                   
                 
                 
       </div>
 </div>
-

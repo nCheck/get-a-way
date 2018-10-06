@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { DataService } from './../data.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output , EventEmitter} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 @Component({
@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit , OnDestroy {
   party = false;
   pubs = false;
   nearby = false;
+  @Output() form1 = new EventEmitter<any[]>();
   constructor(public data: DataService , private router: Router) {
   }
   ngOnInit() {
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit , OnDestroy {
     console.log('submitted');
      // this.data.postMoodData(f.value);
       console.log(f.value);
-      // this.router.navigate(['/places']);
+      this.router.navigate(['/places']);
       console.log('went from home component ');
   }
   toggleMeridian() {

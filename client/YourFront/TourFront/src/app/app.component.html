@@ -11,7 +11,7 @@
 
                 </mat-list-item>
                 <mat-list-item role="listitem">
-                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i></button>
+                                <i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i>
         
                         </mat-list-item>
               </mat-list>
@@ -24,11 +24,8 @@
                     <mat-toolbar-row>
                             <div class="button-row">
                                 <button  mat-button mat-raised-button mat-fab color="accent" class="mr-5"  (click)="sidenav.toggle()"><i class="fas fa-bars"></i></button>
-                                <button mat-raised-button mat-mini-fab class="mr-5"><i class="fas fa-home"><a  routerLink="/home"></a></i></button>
-                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-user"> <a  routerLink="/login"></a></i></button>
-                                <button mat-raised-button  mat-mini-fab class="mr-5"><i class="fas fa-paper-plane"> <a  routerLink="/places"></a></i></button>
-
-                                
+                                <a style="color:white ; margin-right: 10px" routerLink="/home">Home</a>
+                                 <a style="color:white" routerLink="/places">Places</a>
                               </div>
                     </mat-toolbar-row>
                   </mat-toolbar>
