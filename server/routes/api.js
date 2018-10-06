@@ -10,7 +10,7 @@ var regCtrl = require('../ctrlr/reg.ctrl'),
 
 
 
-
+//Dead
 router.route('/start')
     .get(regCtrl.test)
     .post(regCtrl.startPlan)
@@ -27,10 +27,13 @@ router.route('/setMood')
 router.route('/places')
     .get(moodCtrl.dummyPlaces)
 
-router.route('/addFriend')
-    .post()
+router.route('/addMember')
+    .post(usrCtrl.addMember)
 
 router.route('/getWeather')
     .get(usrCtrl.giveWeather)
+
+router.route('/makeTrip')
+    .post(usrCtrl.makeTrip)
 
 module.exports = router;

@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var https = require('https')
 var jrequest = require('request-json');
 var User = mongoose.model('User'),
-    Trip = mongoose.model('Trip')
+    Trip = mongoose.model('Trip') , 
+    Group = mongoose.model('Group')
 
 //Hello
 getElevation = (lat , lon)=>{
@@ -43,7 +44,31 @@ getWeather = (lat , lon) => {
 }
 
 
-module.exports.checkGroup = (req , res)=>{
+module.exports.addMember = (req , res)=>{
+
+    var frnd = req.body.member,
+        email = 'n@gmail.com'
+    
+    Group.findOne({ leader : email } , (err , grp)=>{
+        if(err)
+            res.send(err)
+        else{
+            grp.member.push(frnd)
+            grp.save()
+            var trip = grp.trip
+            User.findOne( { email:frnd } , (err  , usr)=>{
+                if(err){
+                    res.send('User Doesnt Exists')
+                }
+                else{
+                    usr.catalogue.push(trip)
+                    usr.groups.push(grp._id)
+                    usr.save()
+                    res.send("Done")
+                }
+            })
+        }
+    })
     
 }
 
@@ -98,4 +123,81 @@ module.exports.giveWeather = async(req , res)=>{
         res.send(schd)
     } );
  
+}
+
+
+
+
+
+module.exports.makeTrip = (req , res)=>{
+
+    var lat = req.body.lat,
+        lon = req.body.lon,
+        duration = req.body.duration,
+        date = req.body.date;
+    var email = 'n@gmail.com';
+    console.log(req.params , req.body , "hello")
+    // User.findOne( { email : email } , (err , usr) =>{
+    //     if(err){
+    //         console.log(err)
+    //     }
+    //     else{
+    //         console.log(usr , "user")
+    //         Trip.create( {
+    //             loc : [ lat , lon ] ,
+    //             date : date,
+    //             duration: duration,
+    //         } , (err , trip)=>{
+    //             usr.catalogue.push(trip._id)
+    //             usr.save()
+    //             if(!err){
+    //                 res.send("Done")
+    //             }
+    //             else{
+    //                 console.log(err)
+    //                 res.send(err)
+    //             }
+    //         } )
+    //     }
+    // })   
+    res.send("Thanks") 
+}
+
+
+module.exports.regUser = (req , res)=>{
+    var email = req.body.email
+    User.create( {email , email} , (err , usr)=>{
+        res.send('Done')
+    } )
+}
+
+module.exports.getUserTrip = (req , res)=>{
+    var email = req.body.email
+    User.findOne( { email , email} ).populate('catalogue').exec( (err , usr)=>{
+        var trip = null;
+        catalogue.forEach( cat=>{
+            if(cat.isActive){
+                trip = cat
+                return;
+            }
+        } )
+        if( trip != null ){
+            res.send({data:trip , status : true})
+        }
+        else{
+            res.send({data:[] , status : false})
+        }
+    } )
+}
+
+module.exports.setPlaces = (req , res)=>{
+    var places = []
+    var id = req.body.id
+
+    Trip.findById(id , (err , trip)=>{
+        places.forEach( p=>{
+            trip.places.push(p)
+        } )
+        trip.save()
+    })
 }

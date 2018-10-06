@@ -3,7 +3,7 @@ var User = mongoose.model('User'),
     Trip = mongoose.model('Trip')
 
 
-
+//Dead
 module.exports.startPlan = (req , res)=>{
     var lat = req.body.lat,
         lon = req.body.lon,

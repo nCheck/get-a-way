@@ -25,3 +25,11 @@ app.use('/mood',moodRoutes);
 app.listen(port , function () {
 	console.log('Site is active on localhost:' + port+'/');
 });
+
+//Ctrls 
+
+var User = mongoose.model('User')
+
+// User.create({ email : 'a@gmail.com' } , (err , doc)=>{
+// 	console.log(doc)
+// })
